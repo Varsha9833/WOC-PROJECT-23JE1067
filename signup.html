@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>signup page</title>
+</head>
+
+<body class="signupbody">
+
+    <section class="login">
+        <h1>Start Fundraising with FundForChange</h1>
+        <br>
+        <form action="#" name="MainForm" id="MainForm" method="post" enctype="multipart/form-data">
+            <div class="form-floating">
+                <label for="name">Name</label>
+                <input class="inp" id="NameInp" type="text" name="name" placeholder="Enter your name"
+                    autocomplete="given-name">
+            </div>
+            <br>
+            <div class="form-floating">
+                <label for="country">Country</label>
+                <input class="inp" id="CountryInp" type="text" name="country" placeholder="Enter your country name"
+                    autocomplete="given-name">
+            </div>
+            <br>
+            <div class="form-floating">
+                <label for="email">Email</label>
+                <input class="inp" id="EmailInp" type="email" name="email" placeholder="Enter your email id"
+                    autocomplete="g">
+            </div>
+            <br>
+            <div class="form-floating">
+                <label for="password">Password</label>
+                <input class="inp" id="PassInp" type="password" name="password" placeholder="Enter your password">
+            </div>
+            <br>
+            <div class="form-floating">
+                <label for="reason">Tell us why you are fundraising?</label>
+                <input class="inp" id="ReasonInp" type="text" name="reason" placeholder="share your story"
+                    autocomplete="given-name">
+            </div>
+            <br>
+            <div>
+                <button class="sub" type="submit" id="signup">Submit</button>
+            </div>
+            <div class="end">
+                <span>Have an account? <a href="signin.html" onclick="login()">Login</a></span>
+            </div>
+        </form>
+        <br>
+    </section>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAGkO_AW6tT1h_8KpcEnr16NnK8Zo6deA4",
+          authDomain: "user-authentication-c0d89.firebaseapp.com",
+          projectId: "user-authentication-c0d89",
+          storageBucket: "user-authentication-c0d89.appspot.com",
+          messagingSenderId: "942239935570",
+          appId: "1:942239935570:web:10cbf9188fe0d398f0438b",
+          measurementId: "G-DN65QJ869M"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+        const auth = getAuth(app);
+
+        let EmailInp = document.getElementById('EmailInp');
+        let PassInp = document.getElementById('PassInp');
+        let NameInp = document.getElementById('NameInp');
+        let CountryInp = document.getElementById('CountryInp');
+        let ReasonInp = document.getElementById('ReasonInp');
+
+        let registerUser = evt =>{
+            evt.preventDefault();
+
+            createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+            .then((credentials)=>{
+                set(ref(db, 'UsersAuthList/' + credentials.user.uid),{
+                    name: NameInp.value,
+                    county: CountryInp.value
+                })
+
+            })
+            .catch((error)=>{
+                alert(error.message);
+                console.log(error.code);
+                console.log(error.message);
+            })
+
+        }
+        document.getElementById('MainForm').addEventListener('submit', registerUser);
+
+
+      </script>
+</body>
+
+
+</html>

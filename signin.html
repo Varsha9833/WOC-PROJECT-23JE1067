@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>sign in page</title>
+</head>
+
+<body class="signinbody">
+    <section class="login">
+        <h1>Please Sign in to your account</h1>
+        <br>
+        <form action="#" name="MainForm" id="MainForm" method="post" enctype="multipart/form-data">
+
+            <div class="form-floating">
+                <label for="email">Email</label>
+                <input class="inp" id="EmailInp" type="email" name="email" placeholder="Enter your email id"
+                    autocomplete="g">
+            </div>
+            <br>
+            <div class="form-floating">
+                <label for="password">Password</label>
+                <input class="inp" id="PassInp" type="password" name="password" placeholder="Enter your password">
+            </div>
+            <br>
+            <div>
+                <button class="sub" type="submit" id="signup">Submit</button>
+            </div>
+            <div class="end">
+                <span>Don't have an account? <a href="signup.html" onclick="login()">Register</a></span>
+            </div>
+        </form>
+        <br>
+    </section>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAGkO_AW6tT1h_8KpcEnr16NnK8Zo6deA4",
+          authDomain: "user-authentication-c0d89.firebaseapp.com",
+          projectId: "user-authentication-c0d89",
+          storageBucket: "user-authentication-c0d89.appspot.com",
+          messagingSenderId: "942239935570",
+          appId: "1:942239935570:web:10cbf9188fe0d398f0438b",
+          measurementId: "G-DN65QJ869M"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+        const auth = getAuth(app);
+        const dbref = ref(db);
+
+        let EmailInp = document.getElementById('EmailInp');
+        let PassInp = document.getElementById('PassInp');
+        let NameInp = document.getElementById('NameInp');
+        let CountryInp = document.getElementById('CountryInp');
+        let ReasonInp = document.getElementById('ReasonInp');
+
+        let SignInUser = evt =>{
+            evt.preventDefault();
+
+            signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+            .then((credentials)=>{
+                get(child(dbref, 'UsersAuthList/' + credentials.user.uid)).then((snapshot)=>{
+                    if(snapshot.exists){
+                        sessionStorage.setItem("user-info", JSON.stringify({
+                          name: snapshot.val().name,
+                          country: snapshot.val().country  
+                        }))
+                        sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
+                        window.location.href = 'index.html';
+                    }
+                })
+
+            })
+            .catch((error)=>{
+                alert(error.message);
+                console.log(error.code);
+                console.log(error.message);
+            })
+
+        }
+        document.getElementById('MainForm').addEventListener('submit', SignInUser);
+
+
+      </script>
+</body>
+
+</html>
