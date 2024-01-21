@@ -183,49 +183,7 @@ h1{
   font-family: 'Abril Fatface', serif;
   font-size: 40px;  
 }
-/* .login{
-  background-color: papayawhip;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 22px 22px;
-  
-  font-size: 20px;
-  justify-content: center;
-  align-items: center;
-  
-}
-.inp{
-  border: 2px solid black;
-  border-radius: 30px;
-}
-.inp1{
-  border: 2px solid black;
-  border-radius: 30px;
-  width: 400px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: 22px 22px;
-  
-  font-size: 20px;
-  justify-content: center;
-  align-items: center; 
-}
-.sub{
-  border: 2px solid black;
-  border-radius: 30px;
-  background-color: pink;
-  padding: 14px 18px;
-  width: 100%;
-  font-size: 15px;
-}
 
-
-
-   */
 
 .login{
   position: relative;
@@ -290,4 +248,93 @@ h1{
   color: #fff;
   font-weight: 500;
   margin-left: 5px;
+}
+
+.storyfr{
+  font-family: 'Concert One', sans-serif;
+  display: inline-block;
+  border-radius: 0.75rem;
+  border: 2px solid black;
+  padding: 0.5rem;
+  width: 80%;
+  margin: 25px; 
+}
+.imgfr{
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:gainsboro;
+  border-radius: 0.75rem;
+  height: 500px;
+  overflow: hidden;
+  position: relative;  
+}
+.frbtn{
+  font-size: 15px;
+  font-weight: 500;
+  color: black;
+  height: 45px;
+  width: 20%;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  background: rgba(247, 239, 165, 0.623);
+  cursor: pointer;
+}
+.footer{
+  margin: 0;
+  padding: 0;
+}
+.cont{
+  max-width: 1170px;
+ 
+  margin: auto;
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+ul{
+  list-style: none;
+}
+
+.footer{
+ background-color: #24262b;
+ padding: 70px 0;
+}
+
+.footer-col{
+  width: 25%;
+  padding: 0 15px;
+
+}
+.footer-col h4{
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+}
+.footer-col h4::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+.footer-col ul li{
+  margin-bottom: 10px;
+}
+.footer-col ul li a{
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
 }
